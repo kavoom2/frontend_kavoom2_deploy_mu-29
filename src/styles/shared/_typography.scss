@@ -1,0 +1,23 @@
+@mixin text-ellipsis-single {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+
+@mixin text-ellipsis-multiple {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: max(var(--text-max-lines), 2);
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+
+@mixin text-breakword {
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}

@@ -1,0 +1,129 @@
+@use "~@/styles/_variables.scss" as variables;
+@use "~@/styles/_common.scss" as common;
+
+.main {
+  outline: none;
+  border: none;
+
+  min-width: var(--button-container-size, auto);
+  height: var(--button-container-size, auto);
+  line-height: var(--button-container-size, auto);
+
+  background-color: var(--button-container-bg-color, transparent);
+  color: var(--button-label-color, transparent);
+
+  border-radius: 0px;
+
+  padding: 0 var(--button-container-padding-x, 0px);
+  margin: 0;
+}
+
+.fit-to-container {
+  width: 100%;
+}
+
+.content {
+  height: inherit;
+
+  display: inline-flex;
+  align-items: center;
+
+  vertical-align: middle;
+
+  & > *:not(:first-child) {
+    margin: 0px 0px 0px #{variables.$token-spacing-xxs};
+  }
+
+  .icon {
+    display: inline-flex;
+
+    font-size: var(--button-icon-size, auto);
+
+    svg {
+      width: auto;
+      height: 1em;
+    }
+  }
+
+  .label {
+    display: inline-flex;
+
+    font-size: var(--button-label-font-size, auto);
+    line-height: var(--button-label-line-height, auto);
+    font-weight: var(--button-label-font-weight, auto);
+  }
+
+  .icon,
+  .label {
+    svg path {
+      fill: currentColor;
+    }
+  }
+}
+
+// 버튼의 Variant 외형을 결정합니다.
+.variant-solid {
+  --button-container-bg-color: #{variables.$token-color-black};
+  --button-label-color: #{variables.$token-color-white};
+
+  &:not(:disabled):not(.loading) {
+    @include common.hover-without-touchdevice {
+      --button-label-color: #{variables.$token-color-orange};
+    }
+  }
+
+  &:disabled,
+  &.loading {
+    opacity: 0.8;
+  }
+}
+
+.variant-ghost {
+  --button-container-bg-color: transparent;
+  --button-label-color: #{variables.$token-color-charcoal-grey};
+
+  &:disabled,
+  &.loading {
+    opacity: 0.8;
+  }
+}
+
+// 버튼의 크기에 따른 스타일를 정의합니다.
+.size-small {
+  --button-container-size: 32px;
+  --button-container-padding-x: 4px;
+
+  --button-label-font-size: 14px;
+  --button-label-line-height: 1;
+  --button-label-font-weight: 700;
+
+  --button-icon-size: 18px;
+}
+
+.size-medium {
+  --button-container-size: 38px;
+  --button-container-padding-x: 6px;
+
+  --button-label-font-size: 14px;
+  --button-label-line-height: 1;
+  --button-label-font-weight: 700;
+
+  --button-icon-size: 24px;
+}
+
+// 버튼의 상태에 따른 스타일 정의합니다.
+.main {
+  cursor: pointer;
+}
+
+.main:disabled {
+  cursor: not-allowed;
+}
+
+.main.loading {
+  cursor: wait;
+}
+
+.main:focus-visible {
+  box-shadow: 0 0 0 2px #{variables.$token-color-orange};
+}
