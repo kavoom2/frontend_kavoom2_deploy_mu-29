@@ -1,10 +1,4 @@
-import { getUserCartItemMap } from "./cartItems";
-import { cartConfig } from "./config";
 import { ProductItem } from "./types";
-
-const MAX_CART_ITEMS = cartConfig.MAX_CART_ITEMS;
-const MIN_ORDER_COUNT = cartConfig.MIN_ORDER_COUNT;
-const MAX_ORDER_COUNT = cartConfig.MAX_ORDER_COUNT;
 
 const productItems: ProductItem[] = [
   {
@@ -121,8 +115,6 @@ function getPagingProductItemList(page: number, limit: number) {
 
   const start = (page - 1) * limit;
   const end = page * limit;
-
-  const cartItemMap = getUserCartItemMap();
 
   const partialProductItems = [...productItems]
     .sort((a, b) => b.score - a.score)
