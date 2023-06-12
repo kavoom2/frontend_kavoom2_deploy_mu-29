@@ -1,41 +1,32 @@
-"use client";
+import { getCartListQuery } from "@/features/carts";
+import { getProductListQuery } from "@/features/products";
+import { HydrateOnClient, getQueryClient } from "@/libs/reactQuery";
+import { dehydrate } from "@tanstack/query-core";
+import ProductList from "./product-list";
 
-import Button from "@/components/Button/Button";
-import { ShoppingBagIcon } from "@/icons";
-import MainContainer from "@/layouts/MainContainer/MainContainer";
-import TopAppBar from "@/layouts/TopAppBar/TopAppBar";
+export default async function ProductListPage() {
+  const queryClient = getQueryClient();
 
-interface PageHeaderProps {}
+  try {
+    await Promise.all([
+      queryClient.prefetchInfiniteQuery(
+        getProductListQuery.queryKey(),
+        getProductListQuery.queryFn({ limit: 5 }),
+      ),
+      queryClient.prefetchQuery(
+        getCartListQuery.queryKey(),
+        getCartListQuery.queryFn(),
+      ),
+    ]);
 
-const PageHeader: React.FC<PageHeaderProps> = () => {
-  return (
-    <TopAppBar
-      leadingNavItems={<>29CM 아이콘</>}
-      trailingNavItems={
-        <>
-          <Button
-            variant="ghost"
-            size="medium"
-            iconBefore={<ShoppingBagIcon />}
-          />
-        </>
-      }
-    />
-  );
-};
+    const dehydratedState = dehydrate(queryClient);
 
-interface PageMainProps {}
-
-const PageMain: React.FC<PageMainProps> = () => {
-  return <MainContainer>페이지 헤더입니다.</MainContainer>;
-};
-
-export default function ProductList() {
-  return (
-    <>
-      <PageHeader />
-
-      <PageMain />
-    </>
-  );
+    return (
+      <HydrateOnClient state={dehydratedState}>
+        <ProductList />
+      </HydrateOnClient>
+    );
+  } catch (error) {
+    return <div>ERROR!</div>;
+  }
 }
