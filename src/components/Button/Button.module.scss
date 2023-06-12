@@ -2,6 +2,8 @@
 @use "~@/styles/_common.scss" as common;
 
 .main {
+  display: inline-flex;
+
   outline: none;
   border: none;
 
@@ -11,11 +13,14 @@
 
   background-color: var(--button-container-bg-color, transparent);
   color: var(--button-label-color, transparent);
+  text-decoration: none;
 
   border-radius: 0px;
 
   padding: 0 var(--button-container-padding-x, 0px);
   margin: 0;
+
+  vertical-align: unset;
 }
 
 .fit-to-container {
@@ -27,8 +32,6 @@
 
   display: inline-flex;
   align-items: center;
-
-  vertical-align: middle;
 
   & > *:not(:first-child) {
     margin: 0px 0px 0px #{variables.$token-spacing-xxs};
@@ -51,6 +54,8 @@
     font-size: var(--button-label-font-size, auto);
     line-height: var(--button-label-line-height, auto);
     font-weight: var(--button-label-font-weight, auto);
+
+    vertical-align: middle;
   }
 
   .icon,
@@ -66,13 +71,13 @@
   --button-container-bg-color: #{variables.$token-color-black};
   --button-label-color: #{variables.$token-color-white};
 
-  &:not(:disabled):not(.loading) {
+  &:not(.disabled):not(.loading) {
     @include common.hover-without-touchdevice {
       --button-label-color: #{variables.$token-color-orange};
     }
   }
 
-  &:disabled,
+  &.disabled,
   &.loading {
     opacity: 0.8;
   }
@@ -82,7 +87,7 @@
   --button-container-bg-color: transparent;
   --button-label-color: #{variables.$token-color-charcoal-grey};
 
-  &:disabled,
+  &.disabled,
   &.loading {
     opacity: 0.8;
   }
@@ -116,7 +121,7 @@
   cursor: pointer;
 }
 
-.main:disabled {
+.main.disabled {
   cursor: not-allowed;
 }
 

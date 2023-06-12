@@ -38,6 +38,19 @@ export const Variants = (args: Story["args"]) => {
   );
 };
 
+export const AsLink = (args: Story["args"]) => {
+  return (
+    <div>
+      <Button
+        {...args}
+        href="https://www.google.com"
+        target="_blank"
+        type="reset"
+      />
+    </div>
+  );
+};
+
 export const Sizes = (args: Story["args"]) => {
   return (
     <div>
@@ -57,7 +70,7 @@ export const FitToContainer = (args: Story["args"]) => {
 
 export const PrefixAndSuffixIcons = (args: Story["args"]) => {
   return (
-    <div>
+    <div style={{ display: "flex" }}>
       <Button {...args} iconBefore={<ShoppingBagIcon />} />
       <Button {...args} iconAfter={<ShoppingBagIcon />} />
       <Button
