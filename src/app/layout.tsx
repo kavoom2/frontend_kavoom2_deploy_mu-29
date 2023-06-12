@@ -1,6 +1,8 @@
 import "@/styles/_global.scss";
 import { Inter } from "next/font/google";
-import Providers from "./providers";
+import GlobalContextProviders from "./global-context-provider";
+import LayoutHeader from "./layout-header";
+import LayoutMain from "./layout-main";
 
 const inter = Inter({
   weight: ["400", "500", "600", "700", "900"],
@@ -12,15 +14,15 @@ export const metadata = {
   description: "Simple commerce web application :)",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: React.PropsWithChildren<{}>) {
   return (
     <html lang="ko">
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        <GlobalContextProviders>
+          <LayoutHeader />
+
+          <LayoutMain>{children}</LayoutMain>
+        </GlobalContextProviders>
       </body>
     </html>
   );
