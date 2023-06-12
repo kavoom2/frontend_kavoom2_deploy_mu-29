@@ -4,7 +4,7 @@ import styles from "./Text.module.scss";
 // Text 요소의 색상 및 크기는 지정하지 않습니다.
 // - 디자인 시스템 상에 계층에 따른 색상 및 크기가 명확하게 정의되어 있지 않습니다.
 
-type TagAs = keyof Pick<
+type As = keyof Pick<
   JSX.IntrinsicElements,
   "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div"
 >;
@@ -17,7 +17,7 @@ export interface TextProps {
   /**
    * 렌더링할 태그를 지정합니다.
    */
-  tagAs?: TagAs;
+  as?: As;
   /**
    * 최대 줄 수를 지정합니다.
    */
@@ -29,14 +29,14 @@ export interface TextProps {
 }
 
 const Text: React.FC<TextProps> = ({
-  tagAs = "span",
+  as = "span",
   maxLines,
   className,
   style,
   children,
   "data-testid": dataTestId,
 }) => {
-  const Tag = tagAs;
+  const Tag = as;
 
   const mainClassNames = classNames(
     {

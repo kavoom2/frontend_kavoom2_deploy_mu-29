@@ -9,7 +9,7 @@
 // ===========================================================
 export {
   BsCartCheckFill as CartCheckedIcon,
-  BsCartPlus as CartUncheckedIcon
+  BsCartPlus as CartUncheckedIcon,
 } from "react-icons/bs";
 
 export { IoBagHandleSharp as ShoppingBagIcon } from "react-icons/io5";

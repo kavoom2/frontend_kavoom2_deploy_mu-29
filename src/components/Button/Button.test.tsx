@@ -42,4 +42,18 @@ describe("Button", () => {
     fireEvent.click(buttonNode);
     expect(handleClick).toHaveBeenCalledTimes(0);
   });
+
+  it("href가 주어지면 a 태그로 렌더링해야 합니다.", () => {
+    const { getByRole, rerender } = render(
+      <Button label="MyButton" href="https://www.google.com" />,
+    );
+
+    const linkNode = getByRole("link");
+    expect(linkNode).toBeInTheDocument();
+    expect(linkNode).toHaveAttribute("href", "https://www.google.com");
+
+    rerender(<Button label="MyButton" />);
+    const nativeButtonNode = getByRole("button");
+    expect(nativeButtonNode).toBeInTheDocument();
+  });
 });

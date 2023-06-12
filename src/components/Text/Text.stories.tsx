@@ -19,9 +19,8 @@ const meta: Meta<typeof Text> = {
     },
   },
   args: {
-    tagAs: "h1",
+    as: "h1",
     children: "Text",
-    maxLines: 0,
   },
 };
 
@@ -41,14 +40,30 @@ export const Polymorphic = (args: Story["args"]) => {
         alignItems: "flex-start",
       }}
     >
-      <Text tagAs="h1" {...args} />
-      <Text tagAs="h2" {...args} />
-      <Text tagAs="h3" {...args} />
-      <Text tagAs="h4" {...args} />
-      <Text tagAs="h5" {...args} />
-      <Text tagAs="h6" {...args} />
-      <Text tagAs="span" {...args} />
-      <Text tagAs="p" {...args} />
+      <Text {...args} as="h1">
+        h1
+      </Text>
+      <Text {...args} as="h2">
+        h2
+      </Text>
+      <Text {...args} as="h3">
+        h3
+      </Text>
+      <Text {...args} as="h4">
+        h4
+      </Text>
+      <Text {...args} as="h5">
+        h5
+      </Text>
+      <Text {...args} as="h6">
+        h6
+      </Text>
+      <Text {...args} as="span">
+        span
+      </Text>
+      <Text {...args} as="p">
+        p
+      </Text>
     </div>
   );
 };
@@ -56,7 +71,7 @@ export const Polymorphic = (args: Story["args"]) => {
 export const TextEllipsis = (args: Story["args"]) => {
   return (
     <div style={{ maxWidth: "400px" }}>
-      <Text {...args}>
+      <Text {...args} maxLines={args?.maxLines ?? 2}>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of type and
