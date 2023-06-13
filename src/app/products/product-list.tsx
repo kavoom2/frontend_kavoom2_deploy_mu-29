@@ -24,7 +24,7 @@ const MemoedAddOrRemoveFromCartButton = memo(AddOrRemoveFromCartButton);
 
 export default function ProductList() {
   // Query: 제품 목록 조회
-  const getProductListQuery = useGetProductListQuery({ limit: 5 });
+  const getProductListQuery = useGetProductListQuery();
 
   // Query: 장바구니 목록 조회
   const getCartListQuery = useGetCartListQuery();
@@ -38,12 +38,14 @@ export default function ProductList() {
   const deleteCartItemQuery = useDeleteCartItemQuery();
 
   const toggleCart = useCallback(
-    (nextIsAddedToCart: boolean, itemNo: number) => {
+    async (nextIsAddedToCart: boolean, itemNo: number) => {
       if (nextIsAddedToCart) {
-        return addCartItemQuery.mutate({
+        addCartItemQuery.mutate({
           itemNo,
           orderCount: 1,
         });
+
+        return;
       }
 
       deleteCartItemQuery.mutate({
@@ -98,7 +100,7 @@ export default function ProductList() {
 
 const InfiniteScrollFetchTrigger = () => {
   // Query: 제품 목록 조회
-  const getProductListQuery = useGetProductListQuery({ limit: 5 });
+  const getProductListQuery = useGetProductListQuery();
 
   const fetchTriggerRef = useRef<HTMLDivElement>(null);
   const intersectionObserverEntry = useIntersection(fetchTriggerRef);

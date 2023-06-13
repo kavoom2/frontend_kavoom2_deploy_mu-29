@@ -2,7 +2,7 @@ import { getCartListQuery } from "@/features/carts";
 import { HydrateOnClient, getQueryClient } from "@/libs/reactQuery";
 import { dehydrate } from "@tanstack/query-core";
 
-export default async function Carts() {
+export default async function CartPage() {
   const queryClient = getQueryClient();
 
   try {

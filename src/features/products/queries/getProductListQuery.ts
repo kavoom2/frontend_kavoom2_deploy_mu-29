@@ -18,7 +18,7 @@ const getProductListQuery = {
 
     return queryKey;
   },
-  queryFn: ({ limit = 5 }: { limit?: number }) => {
+  queryFn: () => {
     return async function ({
       pageParam = 1,
     }: {
@@ -27,7 +27,7 @@ const getProductListQuery = {
       const { data } = await axios.get("http://localhost:3000/api/products", {
         params: {
           page: pageParam,
-          limit,
+          limit: 5,
         },
       });
 

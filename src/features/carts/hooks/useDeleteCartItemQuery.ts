@@ -16,9 +16,10 @@ function useDeleteCartItemQuery() {
         queryClient.cancelQueries(getCartListQuery.queryKey());
 
         // 이전 장바구니 목록 스냅샷을 가져옵니다.
-        const previousCartListData = queryClient.getQueryData(
-          getCartListQuery.queryKey(),
-        ) as GetCartListQueryFnData | undefined;
+        const previousCartListData =
+          queryClient.getQueryData<GetCartListQueryFnData>(
+            getCartListQuery.queryKey(),
+          );
 
         // 스냅샷이 존재하는 경우 Optimistic 업데이트합니다.
         if (previousCartListData) {
