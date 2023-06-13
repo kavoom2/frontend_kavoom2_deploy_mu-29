@@ -1,6 +1,8 @@
 /**
  * Components
  */
+export { default as ProductCard } from "./components/ProductCard";
+export { default as ProductCardListLayout } from "./components/ProductCardListLayout";
 
 /**
  * Hooks

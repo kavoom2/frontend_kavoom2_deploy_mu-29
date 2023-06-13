@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import TopAppBar from "./TopAppBar";
 
 const meta: Meta<typeof TopAppBar> = {
-  title: "Common/Layout/TopAppBar",
+  title: "Common/Layouts/TopAppBar",
   component: TopAppBar,
   tags: ["autodocs"],
   argTypes: {

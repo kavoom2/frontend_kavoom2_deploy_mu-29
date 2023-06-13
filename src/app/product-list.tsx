@@ -1,10 +1,16 @@
 "use client";
 
-import AspectRatio from "@/components/AspectRatio";
-import { useGetCartListQuery } from "@/features/carts";
-import { useGetProductListQuery } from "@/features/products";
-import Image from "next/image";
+import {
+  AddOrRemoveFromCartButton,
+  useGetCartListQuery,
+} from "@/features/carts";
+import {
+  ProductCard,
+  ProductCardListLayout,
+  useGetProductListQuery,
+} from "@/features/products";
 import { useEffect } from "react";
+import styles from "./styles.module.scss";
 
 export default function ProductList() {
   const getProductListQuery = useGetProductListQuery({ limit: 5 });
@@ -12,34 +18,45 @@ export default function ProductList() {
 
   useEffect(() => {
     if (getProductListQuery.hasNextPage) {
-      getProductListQuery.fetchNextPage();
+      setTimeout(() => {
+        getProductListQuery.fetchNextPage();
+      }, 1000);
     }
   }, [getProductListQuery.dataUpdatedAt]);
 
   return (
-    <div>
+    <ProductCardListLayout className={styles["product-list"]}>
+      {/* 제품 목록 - View */}
       {getProductListQuery.data?.productItems &&
         getProductListQuery.data.productItems.map((product) => (
-          <div key={product.item_no}>
-            <div>{product.item_no}</div>
-            <div>{product.item_name}</div>
-            <div>{product.price}</div>
-            <div>{product.score}</div>
-            <div>{product.detail_image_url}</div>
-            <AspectRatio ratio={1} width={200}>
-              <Image
-                src={product.detail_image_url}
-                alt={product.item_name}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "center",
-                }}
-              />
-            </AspectRatio>
-          </div>
+          <li key={product.item_no}>
+            <ProductCard
+              itemName={product.item_name}
+              detailImageUrl={product.detail_image_url}
+              price={product.price}
+              actions={[
+                <AddOrRemoveFromCartButton
+                  key="add-or-remove-from-cart-button"
+                  itemNo={product.item_no}
+                  isAddedToCart={
+                    getCartListQuery.data?.cartItemsMap?.[product.item_no] > 0
+                      ? true
+                      : false
+                  }
+                  className={styles["product-action-cart-button"]}
+                />,
+              ]}
+            />
+          </li>
         ))}
-    </div>
+
+      {/* 제품 목록 - Placeholder */}
+      {getProductListQuery.isFetchingNextPage &&
+        Array.from({ length: 5 }).map((_, index) => (
+          <li key={`productcard-placeholder-${index}`}>
+            <ProductCard.Placeholder />
+          </li>
+        ))}
+    </ProductCardListLayout>
   );
 }

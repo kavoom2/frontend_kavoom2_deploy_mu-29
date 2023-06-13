@@ -1,6 +1,7 @@
 /**
  * Components
  */
+export { default as AddOrRemoveFromCartButton } from "./components/AddOrRemoveFromCartButton";
 
 /**
  * Hooks

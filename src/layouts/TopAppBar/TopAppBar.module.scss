@@ -48,7 +48,7 @@ $item-gap: calc(#{variables.$token-spacing-xxs} * 1);
 }
 
 .headline-text {
-  font-size: 1.6rem;
+  font-size: 16px;
   font-weight: bold;
   text-align: center;
   color: #{variables.$token-color-black};

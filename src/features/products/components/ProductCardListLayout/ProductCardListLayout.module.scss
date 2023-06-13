@@ -1,0 +1,26 @@
+@use "~@/styles/_variables.scss" as variables;
+@use "~@/styles/_common.scss" as common;
+
+.main {
+  --product-card-list-layout-max-columns: 4;
+  --product-card-list-layout-gap: 40px 20px;
+
+  @include common.res-to-laptop-max {
+    --product-card-list-layout-max-columns: 3;
+  }
+
+  @include common.res-to-mobile-max {
+    --product-card-list-layout-max-columns: 2;
+    --product-card-list-layout-gap: 25px 0px;
+  }
+
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(
+    var(--product-card-list-layout-max-columns),
+    1fr
+  );
+  grid-auto-flow: row dense;
+  gap: var(--product-card-list-layout-gap);
+}

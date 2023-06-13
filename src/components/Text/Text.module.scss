@@ -1,10 +1,6 @@
 @use "~@/styles/_variables.scss" as variables;
 @use "~@/styles/_common.scss" as common;
 
-.ellipsis-single {
-  @include common.text-ellipsis-single;
-}
-
-.ellipsis-multiple {
-  @include common.text-ellipsis-multiple;
+.text-ellipsis {
+  @include common.text-ellipsis;
 }

@@ -38,17 +38,18 @@ const Text: React.FC<TextProps> = ({
 }) => {
   const Tag = as;
 
+  const hasMaxLines = maxLines && maxLines > 0;
+
   const mainClassNames = classNames(
     {
-      [styles["ellipsis-single"]]: maxLines === 1,
-      [styles["ellipsis-multiple"]]: maxLines && maxLines > 1,
+      [styles["text-ellipsis"]]: hasMaxLines,
     },
     className,
   );
 
   const mainStyles: TextStyles = {
     ...style,
-    "--text-max-lines": maxLines && maxLines > 1 ? maxLines : undefined,
+    "--text-max-lines": hasMaxLines ? maxLines : undefined,
   };
 
   return (
