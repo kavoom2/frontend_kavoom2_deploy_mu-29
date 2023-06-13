@@ -9,7 +9,7 @@ export interface BaseButtonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
   label?: string;
-  ariaLabel?: string;
+  "aria-label"?: string;
   iconAfter?: React.ReactNode;
   iconBefore?: React.ReactNode;
   disabled?: boolean;
@@ -38,7 +38,7 @@ const Button = forwardRef(
       variant = "solid",
       size = "medium",
       label,
-      ariaLabel,
+      "aria-label": ariaLabel,
       iconAfter,
       iconBefore,
       onClick,

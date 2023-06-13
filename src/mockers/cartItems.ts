@@ -31,7 +31,13 @@ function addUserCartItem(item_no: number, order_count: number) {
     }
 
     item.order_count += order_count;
-    return;
+
+    return {
+      item_no,
+      order_count: item.order_count,
+      min_order_count: item.min_order_count,
+      max_order_count: item.max_order_count,
+    };
   }
 
   if (cartItems.length >= MAX_CART_ITEMS) {
@@ -52,6 +58,13 @@ function addUserCartItem(item_no: number, order_count: number) {
     min_order_count: MIN_ORDER_COUNT,
     max_order_count: MAX_ORDER_COUNT,
   });
+
+  return {
+    item_no,
+    order_count,
+    min_order_count: MIN_ORDER_COUNT,
+    max_order_count: MAX_ORDER_COUNT,
+  };
 }
 
 function removeUserCartItem(item_no: number) {
@@ -78,7 +91,13 @@ function updateUserCartItem(item_no: number, order_count: number) {
     }
 
     item.order_count = order_count;
-    return;
+
+    return {
+      item_no,
+      order_count,
+      min_order_count: item.min_order_count,
+      max_order_count: item.max_order_count,
+    };
   }
 
   throw new Error("장바구니에 해당 상품이 존재하지 않습니다.");

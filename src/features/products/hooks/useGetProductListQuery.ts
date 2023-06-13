@@ -5,10 +5,10 @@ import getProductListQuery, {
   GetProductListQueryFnData,
 } from "../queries/getProductListQuery";
 
-function useGetProductListQuery({ limit = 5 }: { limit?: number }) {
+function useGetProductListQuery() {
   const getQuery = useInfiniteQuery(
     getProductListQuery.queryKey(),
-    getProductListQuery.queryFn({ limit }),
+    getProductListQuery.queryFn(),
     {
       staleTime: 1000 * 10,
       cacheTime: 1000 * 10,

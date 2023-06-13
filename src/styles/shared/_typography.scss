@@ -1,17 +1,8 @@
-@mixin text-ellipsis-single {
+@mixin text-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  word-break: break-all;
-}
-
-@mixin text-ellipsis-multiple {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: max(var(--text-max-lines), 2);
+  -webkit-line-clamp: var(--text-max-lines, 1);
   -webkit-box-orient: vertical;
   word-break: break-all;
 }

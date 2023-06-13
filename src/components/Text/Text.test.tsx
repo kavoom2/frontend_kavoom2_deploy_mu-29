@@ -21,14 +21,17 @@ describe("Text", () => {
         Hello
       </Text>,
     );
-    expect(getByRole("heading", { level: 1 })).toHaveClass("ellipsis-single");
+    expect(getByRole("heading", { level: 1 })).toHaveClass("text-ellipsis");
+    expect(getByRole("heading", { level: 1 })).toHaveStyle(
+      "--text-max-lines: 1",
+    );
 
     rerender(
       <Text as="h1" maxLines={2}>
         Hello
       </Text>,
     );
-    expect(getByRole("heading", { level: 1 })).toHaveClass("ellipsis-multiple");
+    expect(getByRole("heading", { level: 1 })).toHaveClass("text-ellipsis");
     expect(getByRole("heading", { level: 1 })).toHaveStyle(
       "--text-max-lines: 2",
     );

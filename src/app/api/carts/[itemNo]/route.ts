@@ -7,10 +7,12 @@ export async function POST(
 ) {
   try {
     const itemNo = Number(params.itemNo);
-    const { order_count } = await request.json();
 
-    cardItemsApi.addUserCartItem(itemNo, order_count);
-    return NextResponse.json({ success: true });
+    const { data } = await request.json();
+    const orderCount = data?.order_count;
+
+    const responseData = cardItemsApi.addUserCartItem(itemNo, orderCount);
+    return NextResponse.json(responseData);
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 400 });
@@ -29,10 +31,12 @@ export async function PUT(
 ) {
   try {
     const itemNo = Number(params.itemNo);
-    const { order_count } = await request.json();
 
-    cardItemsApi.updateUserCartItem(itemNo, order_count);
-    return NextResponse.json({ success: true });
+    const { data } = await request.json();
+    const orderCount = data?.order_count;
+
+    const responseData = cardItemsApi.updateUserCartItem(itemNo, orderCount);
+    return NextResponse.json(responseData);
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 400 });
@@ -46,7 +50,7 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: Request,
+  _request: Request,
   { params }: { params: { itemNo: string } },
 ) {
   try {

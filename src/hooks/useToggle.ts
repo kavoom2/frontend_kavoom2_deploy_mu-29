@@ -5,7 +5,7 @@ function toggleReducer(state: boolean, nextValue?: any) {
 }
 
 function useToggle(
-  initialValue: boolean,
+  initialValue: boolean = false,
 ): [boolean, (nextValue?: any) => void] {
   return useReducer(toggleReducer, initialValue);
 }
