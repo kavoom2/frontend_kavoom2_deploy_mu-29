@@ -54,7 +54,7 @@ const AddOrRemoveFromCartButton: React.FC<AddOrRemoveFromCartButtonProps> = ({
   return (
     <Button
       variant="ghost"
-      size="small"
+      size="medium"
       iconBefore={iconNode}
       onClick={composedOnClick}
       aria-label={ariaLabel}

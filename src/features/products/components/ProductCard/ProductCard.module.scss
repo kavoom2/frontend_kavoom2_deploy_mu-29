@@ -2,7 +2,9 @@
 @use "~@/styles/_common.scss" as common;
 
 .main {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 
   img {
     user-select: none;
@@ -11,7 +13,18 @@
 }
 
 .card-informations {
+  flex: 1 0 auto;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   margin: 16px 0 0 0;
+
+  @include common.res-to-laptop-max {
+    padding: 0px 12px 0px;
+  }
 }
 
 .product-name {
@@ -40,10 +53,18 @@
 }
 
 .card-actions {
+  flex: 0 0 auto;
+  width: 100%;
+
+  align-self: flex-end;
   margin: 13px 0 0 0;
   vertical-align: top;
 
   & > *:not(:first-child) {
     margin: 0 0 0 14px;
+  }
+
+  @include common.res-to-laptop-max {
+    padding: 0px 12px 0px;
   }
 }

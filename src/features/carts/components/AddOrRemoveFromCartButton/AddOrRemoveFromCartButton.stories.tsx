@@ -31,7 +31,9 @@ export const Playground: Story<AddOrRemoveFromCartButtonProps> = (args) => {
   );
 };
 
-export const ToggleCart: Story<AddOrRemoveFromCartButtonProps> = (args) => {
+export const WithToggleAction: Story<AddOrRemoveFromCartButtonProps> = (
+  args,
+) => {
   const [isAddedToCart, toggleCart] = useToggle(false);
 
   return (

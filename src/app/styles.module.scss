@@ -8,9 +8,26 @@
   @include common.res-to-laptop-max {
     margin-top: 0px;
   }
+
+  li > * {
+    height: 100%;
+  }
 }
 
 .product-action-cart-button {
   position: relative;
   left: -7px;
+}
+
+.infinite-scroll-fetch-trigger {
+  pointer-events: none;
+  visibility: hidden;
+
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+
+  height: 66vh;
+  width: 100%;
 }
