@@ -5,7 +5,6 @@ import { Modal as ReactResponsiveModal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import styles from "./Modal.module.scss";
 
-
 export interface ModalAction {
   actionId: string;
   variant?: ButtonProps["variant"];
@@ -46,7 +45,7 @@ const ModalContents: React.FC<Omit<ModalProps, "isOpen">> = ({
   children,
 }) => {
   const composeFooterAction =
-    (onClickFooterAction: () => void, shouldCloseModal = true) =>
+    (onClickFooterAction?: () => void, shouldCloseModal = true) =>
     () => {
       onClickFooterAction?.();
 
