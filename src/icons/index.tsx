@@ -10,6 +10,10 @@
 export {
   BsCartCheckFill as CartCheckedIcon,
   BsCartPlus as CartUncheckedIcon,
+  BsCheck2 as CheckboxCheckedIcon,
+  BsDashLg as CounterDownIcon,
+  BsPlusLg as CounterUpIcon,
+  BsXLg as DeleteIcon,
 } from "react-icons/bs";
 
 export { IoBagHandleSharp as ShoppingBagIcon } from "react-icons/io5";

@@ -27,7 +27,7 @@ function addUserCartItem(item_no: number, order_count: number) {
 
   if (item) {
     if (item.order_count + order_count > item.max_order_count) {
-      throw new Error("최대 주문 가능 개수를 초과하였습니다.");
+      throw new Error(`최대 ${item.max_order_count}개까지만 담을 수 있습니다.`);
     }
 
     item.order_count += order_count;
@@ -41,15 +41,15 @@ function addUserCartItem(item_no: number, order_count: number) {
   }
 
   if (cartItems.length >= MAX_CART_ITEMS) {
-    throw new Error("장바구니에 담을 수 있는 최대 개수를 초과하였습니다.");
+    throw new Error(`최대 ${MAX_CART_ITEMS}개까지만 담을 수 있습니다.`);
   }
 
   if (order_count < MIN_ORDER_COUNT) {
-    throw new Error("최소 주문 가능 개수 이상 입력해야 합니다.");
+    throw new Error(`최소 ${MIN_ORDER_COUNT}개 이상 담아야 합니다.`);
   }
 
   if (order_count > MAX_ORDER_COUNT) {
-    throw new Error("최대 주문 가능 개수를 초과하였습니다.");
+    throw new Error(`최대 ${MAX_ORDER_COUNT}개까지만 담을 수 있습니다.`);
   }
 
   cartItems.push({
@@ -83,11 +83,11 @@ function updateUserCartItem(item_no: number, order_count: number) {
 
   if (item) {
     if (order_count < item.min_order_count) {
-      throw new Error("최소 주문 가능 개수 이상 입력해야 합니다.");
+      throw new Error(`최소 ${item.min_order_count}개 이상 담아야 합니다.`);
     }
 
     if (order_count > item.max_order_count) {
-      throw new Error("최대 주문 가능 개수를 초과하였습니다.");
+      throw new Error(`최대 ${item.max_order_count}개까지만 담을 수 있습니다.`);
     }
 
     item.order_count = order_count;

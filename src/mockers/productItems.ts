@@ -130,8 +130,19 @@ function getPagingProductItemList(page: number, limit: number) {
   };
 }
 
+function getProductItem(item_no: number) {
+  const productItem = productItems.find((item) => item.item_no === item_no);
+
+  if (!productItem) {
+    throw new Error("상품이 존재하지 않습니다.");
+  }
+
+  return productItem;
+}
+
 const productItemsApi = {
   getPagingProductItemList,
+  getProductItem,
 };
 
 export default productItemsApi;

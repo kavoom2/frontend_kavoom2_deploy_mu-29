@@ -7,15 +7,19 @@ export interface AddCartItemQueryFnData {
   max_order_count: number;
 }
 
+export interface AddCartItemVariables {
+  itemNo: number;
+  orderCount: number;
+}
+
 const addCartItemQuery = {
   queryKey: () => {
     return ["addCartItem"];
   },
   queryFn: () => {
-    return async function (variables: {
-      itemNo: number;
-      orderCount: number;
-    }): Promise<AddCartItemQueryFnData | never> {
+    return async function (
+      variables: AddCartItemVariables,
+    ): Promise<AddCartItemQueryFnData | never> {
       const { data } = await axios.post(
         `http://localhost:3000/api/carts/${variables.itemNo}`,
         {

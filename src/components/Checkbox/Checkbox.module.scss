@@ -1,0 +1,81 @@
+@use "~@/styles/_variables.scss" as variables;
+@use "~@/styles/_common.scss" as common;
+
+.main {
+  --checkbox-size: 24px;
+  --checkbox-indicator-size: 20px;
+  --checkbox-label-text-size: 15px;
+  --checkbox-label-spacing-x: 12px;
+
+  @include common.res-to-mobile-max {
+    --checkbox-size: 20px;
+    --checkbox-indicator-size: 16px;
+    --checkbox-label-text-size: 13px;
+    --checkbox-label-spacing-x: 8px;
+  }
+
+  display: inline-flex;
+  font-size: var(--checkbox-size);
+}
+
+.checkbox-root {
+  all: unset;
+  flex: 0 0 auto;
+
+  width: calc(var(--checkbox-size) - 2px);
+  height: calc(var(--checkbox-size) - 2px);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: white;
+
+  border-radius: 2px;
+  border: 1px solid rgb(212, 212, 212);
+
+  transition: all 100ms ease-in-out;
+}
+
+.checkbox-indicator {
+  position: absolute;
+
+  display: inline-flex;
+  color: rgb(212, 212, 212);
+
+  svg {
+    height: var(--checkbox-indicator-size);
+    width: auto;
+  }
+
+  svg path {
+    fill: currentColor;
+  }
+}
+
+.checkbox-root[aria-checked="true"] {
+  background-color: rgb(55, 95, 255);
+  border-color: rgb(55, 95, 255);
+
+  .checkbox-indicator {
+    color: white;
+  }
+}
+
+.checkbox-root:focus-visible {
+  box-shadow: 0 0 0 2px black;
+}
+
+.label {
+  position: relative;
+  top: 0.25em;
+
+  flex: 1 1 auto;
+
+  display: inline-block;
+
+  font-size: var(--checkbox-label-text-size);
+  line-height: 1.2;
+
+  padding-left: var(--checkbox-label-spacing-x);
+}

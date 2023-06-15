@@ -20,7 +20,7 @@ export interface AddOrRemoveFromCartButtonProps {
   /**
    * 버튼 클릭 시 호출되는 함수
    */
-  onClick?: React.MouseEventHandler<HTMLElement>;
+  onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   className?: string;
   "data-testid"?: string;
 }

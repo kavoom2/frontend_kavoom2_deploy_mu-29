@@ -3,7 +3,7 @@ import deleteCartItemQuery from "../queries/deleteCartItemQuery";
 import getCartListQuery, {
   GetCartListQueryFnData,
 } from "../queries/getCartListQuery";
-import { getOptimisticCartListWhenDeleted } from "./_utils/deleteCartItemsUtils";
+import { getOptimisticCartListWhenDeleted } from "./_utils/deleteCartItem";
 
 function useDeleteCartItemQuery() {
   const queryClient = useQueryClient();

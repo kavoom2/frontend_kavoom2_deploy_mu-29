@@ -12,12 +12,12 @@ const LayoutHeader: React.FC<LayoutHeaderProps> = () => {
   return (
     <TopAppBar
       leadingNavItems={
-        <Link legacyBehavior passHref href="/">
+        <Link legacyBehavior passHref href="/products">
           <Button variant="ghost" size="medium" iconBefore={<Logo />} />
         </Link>
       }
       trailingNavItems={
-        <Link legacyBehavior passHref href="/carts">
+        <Link legacyBehavior passHref href="/cart">
           <Button
             variant="ghost"
             size="medium"

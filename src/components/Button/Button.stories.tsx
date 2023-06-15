@@ -33,6 +33,7 @@ export const Variants = (args: Story["args"]) => {
   return (
     <div>
       <Button {...args} variant="solid" />
+      <Button {...args} variant="outlined" />
       <Button {...args} variant="ghost" />
     </div>
   );

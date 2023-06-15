@@ -1,0 +1,35 @@
+@use "~@/styles/_common.scss" as common;
+
+.page-layout {
+  margin-top: 52px;
+
+  padding: 0px 0px 100px 0px;
+
+  @include common.res-to-laptop-max {
+    padding: 0px 20px 50px;
+  }
+}
+
+.page-error-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+
+  h2 {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.2;
+
+    margin-bottom: 16px;
+  }
+}
+
+.total-price-descriptions {
+  margin: 117px auto 137px;
+
+  @include common.res-to-laptop-max {
+    margin: 25px 0px 70px;
+  }
+}

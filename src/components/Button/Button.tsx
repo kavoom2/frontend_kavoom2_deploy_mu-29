@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { forwardRef } from "react";
 import styles from "./Button.module.scss";
 
-type ButtonVariant = "solid" | "ghost";
+type ButtonVariant = "solid" | "outlined" | "ghost";
 type ButtonSize = "medium" | "small";
 
 export interface BaseButtonProps {
@@ -21,13 +21,13 @@ export interface BaseButtonProps {
 
 export interface NativeButtonProps extends BaseButtonProps {
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export interface AnchorButtonProps extends BaseButtonProps {
   href: string;
   target?: string;
-  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
 export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;

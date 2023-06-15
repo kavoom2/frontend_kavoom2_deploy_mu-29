@@ -80,6 +80,8 @@ const _ProductCard: React.FC<ProductCardProps> = ({
   );
 };
 
+_ProductCard.displayName = "ProductCard";
+
 const Placeholder: React.FC<
   Pick<ProductCardProps, "className" | "data-testid">
 > = ({ className, "data-testid": dataTestId }) => {
@@ -112,6 +114,8 @@ const Placeholder: React.FC<
     </div>
   );
 };
+
+Placeholder.displayName = "ProductCard.Placeholder";
 
 const ProductCard = Object.assign(_ProductCard, {
   Placeholder,
