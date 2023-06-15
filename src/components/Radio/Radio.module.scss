@@ -1,0 +1,80 @@
+@use "~@/styles/_variables.scss" as variables;
+@use "~@/styles/_common.scss" as common;
+
+.main {
+}
+
+.main {
+  --radio-size: 20px;
+  --radio-indicator-size: 8px;
+  --radio-label-text-size: 15px;
+  --radio-label-spacing-x: 8px;
+
+  @include common.res-to-mobile-max {
+    --radio-size: 16px;
+    --radio-indicator-size: 6px;
+    --radio-label-text-size: 13px;
+    --radio-label-spacing-x: 4px;
+  }
+
+  display: inline-flex;
+  font-size: var(--radio-size);
+}
+
+.radio-item {
+  all: unset;
+
+  width: calc(var(--radio-size) - 2px);
+  height: calc(var(--radio-size) - 2px);
+
+  background-color: white;
+  border-radius: 100%;
+  border: 1px solid rgb(212, 212, 212);
+
+  &:hover {
+    background-color: rgb(245, 242, 255);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px black;
+  }
+}
+
+.radio-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  &:after {
+    content: "";
+    display: block;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: var(--radio-indicator-size);
+    height: var(--radio-indicator-size);
+
+    border-radius: 50%;
+    background-color: #375fff;
+  }
+}
+
+.label {
+  position: relative;
+  top: 0.1em;
+
+  flex: 1 1 auto;
+
+  display: inline-block;
+
+  font-size: var(--radio-label-text-size);
+  line-height: 1.2;
+
+  padding-left: var(--radio-label-spacing-x);
+}

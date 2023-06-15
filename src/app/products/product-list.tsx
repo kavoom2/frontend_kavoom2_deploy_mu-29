@@ -13,6 +13,8 @@ import {
 } from "@/features/products";
 import useDidUpdate from "@/hooks/useDidUpdate";
 import useIntersection from "@/hooks/useIntersection";
+import useToastEmitter from "@/hooks/useToastEmitter";
+import { AxiosError } from "axios";
 import { memo, useCallback, useRef } from "react";
 import isDeepEqual from "react-fast-compare";
 import styles from "./styles.module.scss";
@@ -29,30 +31,51 @@ export default function ProductList() {
   // Query: 장바구니 목록 조회
   const getCartListQuery = useGetCartListQuery();
 
-  // Query: 장바구니 아이템 추가
-  // TODO: 다음 케이스에 대하여 추가적인 처리가 필요합니다.
-  // - 장바구니에 담을 수 있는 최대 물품 갯수를 초과하는 경우
+  // Query: 장바구니 아이템 추가 + 삭제
   const addCartItemQuery = useAddCartItemQuery();
-
-  // Query: 장바구니 아이템 삭제
   const deleteCartItemQuery = useDeleteCartItemQuery();
+
+  // Hooks: Toast Emitter
+  const toastEmitter = useToastEmitter();
 
   const toggleCart = useCallback(
     async (nextIsAddedToCart: boolean, itemNo: number) => {
-      if (nextIsAddedToCart) {
-        addCartItemQuery.mutate({
+      try {
+        if (nextIsAddedToCart) {
+          await addCartItemQuery.mutateAsync({
+            itemNo,
+            orderCount: 1,
+          });
+
+          return;
+        }
+
+        await deleteCartItemQuery.mutateAsync({
           itemNo,
-          orderCount: 1,
         });
+      } catch (error) {
+        if (!(error instanceof AxiosError)) {
+          toastEmitter.error(
+            "알 수 없는 오류가 발생했습니다. 다시 시도해 주세요.",
+          );
+          return;
+        }
 
-        return;
+        if (error?.response?.status == 400) {
+          toastEmitter.error(error.response?.data?.error);
+          return;
+        }
+
+        toastEmitter.error(
+          "알 수 없는 오류가 발생했습니다. 다시 시도해 주세요.",
+        );
       }
-
-      deleteCartItemQuery.mutate({
-        itemNo,
-      });
     },
-    [addCartItemQuery.mutate, deleteCartItemQuery.mutate],
+    [
+      addCartItemQuery.mutateAsync,
+      deleteCartItemQuery.mutateAsync,
+      toastEmitter,
+    ],
   );
 
   return (
@@ -72,8 +95,6 @@ export default function ProductList() {
                     itemNo={product.item_no}
                     isAddedToCart={
                       getCartListQuery.data?.cartItemsMap?.[product.item_no] > 0
-                        ? true
-                        : false
                     }
                     className={styles["product-action-cart-button"]}
                     toggleCart={toggleCart}
@@ -102,6 +123,7 @@ const InfiniteScrollFetchTrigger = () => {
   // Query: 제품 목록 조회
   const getProductListQuery = useGetProductListQuery();
 
+  // Hooks: Intersection Observer
   const fetchTriggerRef = useRef<HTMLDivElement>(null);
   const intersectionObserverEntry = useIntersection(fetchTriggerRef);
 
@@ -110,6 +132,7 @@ const InfiniteScrollFetchTrigger = () => {
     getProductListQuery.hasNextPage &&
     !getProductListQuery.isFetchingNextPage;
 
+  // Side Effect: 다음 페이지의 제품 목록을 조회합니다.
   useDidUpdate(() => {
     if (shouldFetchNextPage) {
       getProductListQuery.fetchNextPage();

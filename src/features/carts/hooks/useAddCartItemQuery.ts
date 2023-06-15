@@ -3,7 +3,7 @@ import addCartItemQuery from "../queries/addCartItemQuery";
 import getCartListQuery, {
   GetCartListQueryFnData,
 } from "../queries/getCartListQuery";
-import { getOptimisticCartListWhenAdded } from "./_utils/addCartItemsUtils";
+import { getOptimisticCartListWhenAdded } from "./_utils/addCartItem";
 
 function useAddCartItemQuery() {
   const queryClient = useQueryClient();
@@ -16,9 +16,10 @@ function useAddCartItemQuery() {
         queryClient.cancelQueries(getCartListQuery.queryKey());
 
         // 이전 장바구니 목록 스냅샷을 가져옵니다.
-        const previousCartListData = queryClient.getQueryData<GetCartListQueryFnData>(
-          getCartListQuery.queryKey(),
-        );
+        const previousCartListData =
+          queryClient.getQueryData<GetCartListQueryFnData>(
+            getCartListQuery.queryKey(),
+          );
 
         // 스냅샷이 존재하는 경우 Optimistic 업데이트합니다.
         if (previousCartListData) {

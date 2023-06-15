@@ -49,22 +49,22 @@ export const Placeholder: Story<ProductCardProps> = (args) => {
   return (
     <ProductCardListLayout>
       <li>
-        <ProductCard.Placeholder {...args} />
+        <ProductCard.Placeholder />
       </li>
       <li>
-        <ProductCard.Placeholder {...args} />
+        <ProductCard.Placeholder />
       </li>
       <li>
-        <ProductCard.Placeholder {...args} />
+        <ProductCard.Placeholder />
       </li>
       <li>
-        <ProductCard.Placeholder {...args} />
+        <ProductCard.Placeholder />
       </li>
       <li>
-        <ProductCard.Placeholder {...args} />
+        <ProductCard.Placeholder />
       </li>
       <li>
-        <ProductCard.Placeholder {...args} />
+        <ProductCard.Placeholder />
       </li>
     </ProductCardListLayout>
   );

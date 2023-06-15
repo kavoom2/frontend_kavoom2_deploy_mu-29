@@ -3,6 +3,8 @@
 
 .main {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   outline: none;
   border: none;
@@ -16,6 +18,8 @@
   text-decoration: none;
 
   border-radius: 0px;
+  border: 1px solid
+    var(--button-container-border-color, --button-container-bg-color);
 
   padding: 0 var(--button-container-padding-x, 0px);
   margin: 0;
@@ -83,6 +87,17 @@
   }
 }
 
+.variant-outlined {
+  --button-container-bg-color: white;
+  --button-container-border-color: #e4e4e4;
+  --button-label-color: #a0a0a0;
+
+  &.disabled,
+  &.loading {
+    opacity: 0.8;
+  }
+}
+
 .variant-ghost {
   --button-container-bg-color: transparent;
   --button-label-color: #{variables.$token-color-charcoal-grey};
@@ -130,5 +145,5 @@
 }
 
 .main:focus-visible {
-  box-shadow: 0 0 0 2px #{variables.$token-color-orange};
+  box-shadow: 0 0 0 2px black;
 }

@@ -1,14 +1,14 @@
-import { CartItem } from "@/mockers/types";
+import { CartItem, CartedProductItem } from "@/mockers/types";
 import axios from "axios";
 
 export interface GetCartListQueryFnData {
-  cartItems: CartItem[];
+  cartItems: CartedProductItem[];
   totalCartItems: number;
   maxCartItems: number;
 }
 
 export interface GetCartListQueryData {
-  cartItems: CartItem[];
+  cartItems: CartedProductItem[];
   cartItemsMap: Record<CartItem["item_no"], number>;
   totalCartItems: number;
   maxCartItems: number;
