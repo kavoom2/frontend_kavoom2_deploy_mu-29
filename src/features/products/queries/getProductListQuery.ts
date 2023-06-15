@@ -1,5 +1,5 @@
+import { apiInstance } from "@/libs/axios";
 import { ProductItem } from "@/mockers/types";
-import axios from "axios";
 
 export interface GetProductListQueryFnData {
   nextPage: number | null;
@@ -24,7 +24,7 @@ const getProductListQuery = {
     }: {
       pageParam?: number | null;
     }): Promise<GetProductListQueryFnData | never> {
-      const { data } = await axios.get("http://localhost:3000/api/products", {
+      const { data } = await apiInstance.get("products", {
         params: {
           page: pageParam,
           limit: 5,
