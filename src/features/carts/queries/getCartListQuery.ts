@@ -1,5 +1,5 @@
+import { apiInstance } from "@/libs/axios";
 import { CartItem, CartedProductItem } from "@/mockers/types";
-import axios from "axios";
 
 export interface GetCartListQueryFnData {
   cartItems: CartedProductItem[];
@@ -22,7 +22,7 @@ const getCartListQuery = {
   },
   queryFn: () => {
     return async function (): Promise<GetCartListQueryFnData | never> {
-      const { data } = await axios.get("http://localhost:3000/api/carts");
+      const { data } = await apiInstance.get("carts");
 
       return data;
     };

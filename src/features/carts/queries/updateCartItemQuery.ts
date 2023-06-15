@@ -1,4 +1,4 @@
-import axios from "axios";
+import { apiInstance } from "@/libs/axios";
 
 export interface UpdateCartItemQueryFnData {
   item_no: number;
@@ -20,14 +20,11 @@ const updateCartItemQuery = {
     return async function (
       variables: UpdateCartItemVariables,
     ): Promise<UpdateCartItemQueryFnData | never> {
-      const { data } = await axios.put(
-        `http://localhost:3000/api/carts/${variables.itemNo}`,
-        {
-          data: {
-            order_count: variables.orderCount,
-          },
+      const { data } = await apiInstance.put(`carts/${variables.itemNo}`, {
+        data: {
+          order_count: variables.orderCount,
         },
-      );
+      });
 
       return data;
     };

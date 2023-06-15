@@ -1,4 +1,4 @@
-import axios from "axios";
+import { apiInstance } from "@/libs/axios";
 
 export interface AddCartItemQueryFnData {
   item_no: number;
@@ -20,14 +20,11 @@ const addCartItemQuery = {
     return async function (
       variables: AddCartItemVariables,
     ): Promise<AddCartItemQueryFnData | never> {
-      const { data } = await axios.post(
-        `http://localhost:3000/api/carts/${variables.itemNo}`,
-        {
-          data: {
-            order_count: variables.orderCount,
-          },
+      const { data } = await apiInstance.post(`carts/${variables.itemNo}`, {
+        data: {
+          order_count: variables.orderCount,
         },
-      );
+      });
 
       return data;
     };

@@ -1,5 +1,5 @@
+import { apiInstance } from "@/libs/axios";
 import { Coupon } from "@/mockers/types";
-import axios from "axios";
 
 export interface GetCartListQueryFnData {
   coupons: Coupon[];
@@ -19,7 +19,7 @@ const getCouponListQuery = {
   },
   queryFn: () => {
     return async function (): Promise<GetCartListQueryFnData | never> {
-      const { data } = await axios.get("http://localhost:3000/api/coupons");
+      const { data } = await apiInstance.get("coupons");
 
       return data;
     };
