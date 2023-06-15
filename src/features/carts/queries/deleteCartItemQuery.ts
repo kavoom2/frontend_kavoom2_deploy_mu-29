@@ -1,4 +1,4 @@
-import axios from "axios";
+import { apiInstance } from "@/libs/axios";
 
 export interface DeleteCartItemQueryFnData {
   success: boolean;
@@ -16,9 +16,7 @@ const deleteCartItemQuery = {
     return async function (
       variables: DeleteCartItemVariables,
     ): Promise<DeleteCartItemQueryFnData | never> {
-      const { data } = await axios.delete(
-        `http://localhost:3000/api/carts/${variables.itemNo}`,
-      );
+      const { data } = await apiInstance.delete(`carts/${variables.itemNo}`);
 
       return data;
     };
