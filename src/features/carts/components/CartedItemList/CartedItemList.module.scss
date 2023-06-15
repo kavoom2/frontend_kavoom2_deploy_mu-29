@@ -1,0 +1,259 @@
+@use "~@/styles/_variables.scss" as variables;
+@use "~@/styles/_common.scss" as common;
+
+.main {
+  border-bottom: 1px solid #000000;
+}
+
+.description-header {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-top: 4px solid #000000;
+
+  .header-table-cell {
+    display: table-cell;
+
+    padding: 0px;
+    border: 0px;
+    height: 74px;
+
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #000000;
+
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .header-table-cell-selection {
+    width: 4.3%;
+  }
+
+  .header-table-cell-common {
+    width: 200px;
+  }
+
+  @include common.res-to-mobile-max {
+    display: none;
+  }
+}
+
+.description-no-content {
+  width: 100%;
+  padding: 100px 16px;
+
+  border-top-width: 4px;
+  border-top-style: solid;
+  border-top-color: black;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: black;
+
+  font-weight: 500;
+  font-size: 32px;
+  color: black;
+  text-align: center;
+}
+
+.description-card {
+  @include common.res-to-tablet-min {
+    position: relative;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+
+    border-top: 1px solid #e4e4e4;
+
+    & > .card-table-cell:not(:first-child):not(:nth-child(2)) {
+      border-left: 1px solid #e4e4e4;
+    }
+
+    .card-table-cell {
+      display: table-cell;
+
+      font-size: 18px;
+      line-height: 24px;
+      color: #000000;
+      text-align: center;
+
+      vertical-align: middle;
+
+      padding: 30px 0px;
+    }
+
+    .card-selection-area {
+      width: 4.3%;
+    }
+
+    .card-common-area {
+      width: 200px;
+    }
+
+    .card-item-info-area {
+      padding: 27px 60px 30px 0px;
+      text-align: left;
+    }
+
+    .card-item-info-area-body {
+      display: flex;
+      height: 100%;
+
+      .item-info-detail-image {
+        flex: 0 0 auto;
+
+        position: relative;
+
+        width: 110px;
+        height: 110px;
+
+        margin: 3px 25px 0px 0px;
+      }
+
+      .item-info-descsriptions {
+        flex: 1 1 auto;
+
+        display: flex;
+        flex-direction: column;
+
+        .item-info-descriptions-title {
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 22px;
+          color: #000000;
+
+          word-break: break-all;
+        }
+
+        .item-info-descriptions-price {
+          margin-top: 6px;
+          font-size: 13px;
+          font-weight: 400;
+          line-height: 22px;
+          color: #303033;
+        }
+      }
+
+      .item-info-actions {
+        flex: 0 0 auto;
+
+        margin: 0px 0px 0px 20px;
+      }
+    }
+  }
+
+  @include common.res-to-mobile-max {
+    position: relative;
+
+    width: 100%;
+    border-top: 1px solid #e4e4e4;
+    padding: 40px 0px 15px;
+
+    .card-table-cell {
+      color: #000000;
+      text-align: left;
+    }
+
+    .card-selection-area {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      pointer-events: none;
+
+      & > * {
+        pointer-events: auto;
+      }
+    }
+
+    .card-common-area {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    .card-order-count-area {
+      margin: 15px 0px;
+    }
+
+    .card-order-price-area {
+      font-size: 18px;
+      line-height: 24px;
+      font-weight: 600;
+      color: #000000;
+      word-break: break-all;
+
+      strong {
+        font-size: 22px;
+      }
+    }
+
+    .card-item-info-area-body {
+      display: flex;
+      flex-direction: row-reverse;
+
+      .item-info-detail-image {
+        flex: 0 0 auto;
+
+        position: relative;
+
+        width: 76px;
+        height: 76px;
+
+        margin: 10px 0px 0px;
+      }
+
+      .item-info-descsriptions {
+        flex: 1 1 auto;
+
+        display: flex;
+        flex-direction: column;
+
+        .item-info-descriptions-title {
+          color: #000000;
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 22px;
+
+          word-break: break-all;
+
+          margin-top: 5px;
+          margin-right: 20px;
+        }
+
+        .item-info-descriptions-price {
+          font-size: 13px;
+          line-height: 22px;
+          color: #303033;
+
+          margin-top: 6px;
+          margin-right: 20px;
+        }
+      }
+
+      .item-info-actions {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        pointer-events: none;
+
+        & > * {
+          pointer-events: auto;
+        }
+      }
+    }
+  }
+}

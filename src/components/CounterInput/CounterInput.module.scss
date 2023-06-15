@@ -1,0 +1,40 @@
+@use "~@/styles/_variables.scss" as variables;
+@use "~@/styles/_common.scss" as common;
+
+.main {
+  display: inline-flex;
+  align-items: stretch;
+}
+
+.count-up {
+  border-left: none !important;
+}
+
+.count-down {
+  border-right: none !important;
+}
+
+.input {
+  all: unset;
+
+  width: 60px;
+
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #1a1a1a;
+
+  border: 1px solid #e4e4e4;
+
+  @include common.res-to-mobile-max {
+    width: 40px;
+  }
+}
+
+.input:hover {
+  border-color: #000000;
+}
+
+.input:focus-visible {
+  border-color: #000000;
+}

@@ -1,0 +1,4 @@
+// 컴포넌트에서 사용하는 공통 스타일 유틸을 정의합니다.
+@forward "./shared/_typography.scss";
+@forward "./shared/_utils.scss";
+@forward "./shared/_media-queries.scss";

@@ -1,0 +1,18 @@
+@use "~@/styles/_variables.scss" as variables;
+@use "~@/styles/_common.scss" as common;
+
+.main {
+  width: 100%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  padding: 0;
+  margin: 0;
+}
+
+.main-width-provider {
+  width: inherit;
+  max-width: #{variables.$token-layout-max-width};
+  margin: 0px auto;
+}

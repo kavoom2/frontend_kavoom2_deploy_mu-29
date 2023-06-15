@@ -1,0 +1,11 @@
+@use "~@/styles/_variables.scss" as variables;
+@use "~@/styles/_common.scss" as common;
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+
+  & > *:not(:first-child) {
+    margin: 16px 0px 0px 0px;
+  }
+}
