@@ -21,10 +21,10 @@ export default function CartList() {
   // Query: 장바구니 목록 조회
   const getCartListQuery = useGetCartListQuery();
 
-  const cartedProductItemList = getCartListQuery.data.cartItems ?? [];
+  const cartedProductItemList = getCartListQuery.data?.cartItems ?? [];
 
   const [selectedItems, updateSelectedItems] = useState<number[]>(
-    getCartListQuery.data.cartItems.map((cartItem) => cartItem.item_no) ?? [],
+    getCartListQuery.data?.cartItems?.map((cartItem) => cartItem.item_no) ?? [],
   );
 
   // Query: 쿠폰 목록 조회
