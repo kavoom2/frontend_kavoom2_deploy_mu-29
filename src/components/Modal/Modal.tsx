@@ -1,6 +1,7 @@
 "use client";
 
 import Button, { ButtonProps } from "@/components/Button";
+import { createContext, useContext, useMemo } from "react";
 import { Modal as ReactResponsiveModal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import styles from "./Modal.module.scss";
@@ -17,10 +18,29 @@ export interface ModalProps {
   isOpen: boolean;
   toggleModal: (nextIsOpen?: boolean) => void;
   children?: React.ReactNode;
+}
+
+export interface ModalBodyProps {
+  children?: React.ReactNode;
   actions?: ModalAction[];
 }
 
-const Modal: React.FC<ModalProps> = (props) => {
+interface ModalCoreContextProvider {
+  toggleModal: (nextIsOpen?: boolean) => void;
+}
+
+export const ModalCoreContext = createContext<ModalCoreContextProvider | null>(
+  null,
+);
+
+const _Modal: React.FC<ModalProps> = (props) => {
+  const modalCoreContextValue = useMemo(
+    () => ({
+      toggleModal: props.toggleModal,
+    }),
+    [props.toggleModal],
+  );
+
   if (!props.isOpen) {
     return null;
   }
@@ -34,16 +54,20 @@ const Modal: React.FC<ModalProps> = (props) => {
         modal: styles["modal-instance"],
       }}
     >
-      <ModalContents {...props} />
+      <ModalCoreContext.Provider value={modalCoreContextValue}>
+        {props.children}
+      </ModalCoreContext.Provider>
     </ReactResponsiveModal>
   );
 };
 
-const ModalContents: React.FC<Omit<ModalProps, "isOpen">> = ({
-  toggleModal,
-  actions,
-  children,
-}) => {
+_Modal.displayName = "Modal";
+
+const ModalBody: React.FC<ModalBodyProps> = ({ actions, children }) => {
+  const modalCoreContext = useContext(ModalCoreContext);
+
+  const toggleModal = modalCoreContext?.toggleModal;
+
   const composeFooterAction =
     (onClickFooterAction?: () => void, shouldCloseModal = true) =>
     () => {
@@ -75,5 +99,11 @@ const ModalContents: React.FC<Omit<ModalProps, "isOpen">> = ({
     </>
   );
 };
+
+ModalBody.displayName = "Modal.Body";
+
+const Modal = Object.assign(_Modal, {
+  Body: ModalBody,
+});
 
 export default Modal;

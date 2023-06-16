@@ -1,36 +1,31 @@
 "use client";
 
-import Modal from "@/components/Modal";
+import Modal, { ModalProps } from "@/components/Modal";
 import Radio from "@/components/Radio";
 import { Coupon } from "@/mockers/types";
 import { useState } from "react";
 import "react-responsive-modal/styles.css";
 import styles from "./CouponSelectModal.module.scss";
 
-export interface CouponSelectModalProps {
-  isOpen: boolean;
-  toggleModal: (nextIsOpen?: boolean) => void;
+export interface CouponSelectModalProps extends ModalProps {
   coupons: Coupon[];
   defaultSelectdCouponId?: string;
   onConfirmCoupon: (selectedCouponId: string) => void;
 }
 
 const CouponSelectModal: React.FC<CouponSelectModalProps> = (props) => {
-  if (!props.isOpen) {
-    return null;
-  }
+  const { isOpen, toggleModal, ...couponSelectModalProps } = props;
 
-  return <CouponSelectModalImpl {...props} />;
+  return (
+    <Modal isOpen={props.isOpen} toggleModal={props.toggleModal}>
+      <CouponSelectModalBody {...couponSelectModalProps} />
+    </Modal>
+  );
 };
 
-const CouponSelectModalImpl: React.FC<
-  Omit<CouponSelectModalProps, "isOpen">
-> = ({
-  toggleModal,
-  coupons = [],
-  defaultSelectdCouponId,
-  onConfirmCoupon,
-}) => {
+const CouponSelectModalBody: React.FC<
+  Omit<CouponSelectModalProps, "isOpen" | "toggleModal">
+> = ({ coupons = [], defaultSelectdCouponId, onConfirmCoupon }) => {
   const [selectedCouponId, updateSelectedCouponId] = useState(
     defaultSelectdCouponId ?? undefined,
   );
@@ -42,9 +37,7 @@ const CouponSelectModalImpl: React.FC<
   };
 
   return (
-    <Modal
-      isOpen
-      toggleModal={toggleModal}
+    <Modal.Body
       actions={[
         {
           actionId: "cancel",
@@ -72,7 +65,7 @@ const CouponSelectModalImpl: React.FC<
           />
         ))}
       </Radio.Group>
-    </Modal>
+    </Modal.Body>
   );
 };
 
