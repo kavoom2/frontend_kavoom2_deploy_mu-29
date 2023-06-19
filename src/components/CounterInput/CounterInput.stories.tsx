@@ -12,6 +12,10 @@ const meta: Meta<typeof CounterInput> = {
       },
     },
   },
+  args: {
+    min: -Infinity,
+    max: Infinity,
+  },
 };
 
 export default meta;
