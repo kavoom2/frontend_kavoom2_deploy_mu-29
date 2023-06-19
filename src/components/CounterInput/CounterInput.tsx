@@ -1,4 +1,5 @@
 import { CounterDownIcon, CounterUpIcon } from "@/icons";
+import classNames from "classnames";
 import { ForwardedRef, forwardRef, useRef } from "react";
 import { mergeRefs } from "react-merge-refs";
 import {
@@ -18,8 +19,14 @@ export type CounterInputProps = Pick<
     | "isAllowed"
     | "allowNegative"
     | "displayType"
-    | "text"
+    | "type"
     | "onValueChange"
+    | "prefix"
+    | "suffix"
+    | "inputMode"
+    | "allowedDecimalSeparators"
+    | "allowLeadingZeros"
+    | "customInput"
   >
 > & {
   "data-testid"?: string;
@@ -34,6 +41,7 @@ const CounterInput = forwardRef(
       min = -Infinity,
       max = Infinity,
       onValueChange,
+      "data-testid": dataTestid,
       ...restProps
     }: CounterInputProps,
     ref: React.ForwardedRef<HTMLInputElement>,
@@ -49,6 +57,7 @@ const CounterInput = forwardRef(
       ...restProps,
       displayType: "input",
       type: "text",
+      inputMode: "numeric",
       isAllowed,
       allowNegative: min < 0,
       onValueChange: (values) => {
@@ -67,6 +76,7 @@ const CounterInput = forwardRef(
         max={max}
         getInputRef={ref}
         customInput={CounterInputImpl}
+        data-testid={dataTestid}
       />
     );
   },
@@ -77,7 +87,7 @@ const CounterInputImpl = forwardRef(
     props: Exclude<
       React.InputHTMLAttributes<HTMLInputElement>,
       "min" | "max"
-    > & { min: number; max: number },
+    > & { min: number; max: number; "data-testid"?: string },
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     const inputRef = useRef<HTMLInputElement | null>(null);
@@ -110,11 +120,31 @@ const CounterInputImpl = forwardRef(
       );
 
       // 유효한 값인지 여부는 NumericFormat 컴포넌트에 위임합니다.
+      let prevented = false;
+      let stopped = false;
+
+      const event = new Event("change");
+      Object.defineProperty(event, "target", {
+        value: inputRef.current,
+        enumerable: true,
+      });
+
       props.onChange &&
         props?.onChange({
+          ...event,
+          persist: () => {},
+          nativeEvent: event,
           target: inputRef.current,
           currentTarget: inputRef.current,
-        } as React.ChangeEvent<HTMLInputElement>);
+          isDefaultPrevented: () => prevented,
+          isPropagationStopped: () => stopped,
+          preventDefault: () => {
+            prevented = true;
+          },
+          stopPropagation: () => {
+            stopped = true;
+          },
+        });
     };
 
     const onCountDown = () => {
@@ -127,11 +157,32 @@ const CounterInputImpl = forwardRef(
         (value) => value - 1,
       );
 
+      // 유효한 값인지 여부는 NumericFormat 컴포넌트에 위임합니다.
+      let prevented = false;
+      let stopped = false;
+
+      const event = new Event("change");
+      Object.defineProperty(event, "target", {
+        value: inputRef.current,
+        enumerable: true,
+      });
+
       props.onChange &&
         props?.onChange({
+          ...event,
+          persist: () => {},
+          nativeEvent: event,
           target: inputRef.current,
           currentTarget: inputRef.current,
-        } as React.ChangeEvent<HTMLInputElement>);
+          isDefaultPrevented: () => prevented,
+          isPropagationStopped: () => stopped,
+          preventDefault: () => {
+            prevented = true;
+          },
+          stopPropagation: () => {
+            stopped = true;
+          },
+        });
     };
 
     const composedOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -152,8 +203,13 @@ const CounterInputImpl = forwardRef(
       coundUpDisabled = true;
     }
 
+    const { className, "data-testid": dataTestid } = props;
+
     return (
-      <div className={styles.main}>
+      <div
+        className={classNames(styles.main, className)}
+        data-testid={dataTestid}
+      >
         <Button
           iconBefore={<CounterDownIcon />}
           size="small"
